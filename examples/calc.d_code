@@ -1,0 +1,129 @@
+program_delta
+
+section:manifest
+*name calc_one
+*size_stack 100
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~null 0
+
+section:const 16
+@0 ~string " Выберите операцию: "
+@1 ~string " 1. Сложение "
+@2 ~string " 2. Разность "
+@3 ~string " 3. Произведение "
+@4 ~string " 4. Деление "
+@5 ~string " Введите первое число: "
+@6 ~string " Введите второе число: "
+@7 ~string " Результат: "
+@8 ~string " Calc One. Copyright(C) Кузьмичев Николай 2018 "
+@9 ~integer 0
+@10 ~integer 1
+@11 ~integer 2
+@12 ~integer 3
+@13 ~integer 4
+@14 ~string " Вы хотите повторить? "
+@15 ~string " Деление на ноль невозможно! "
+
+section:variable 3
+$0 ~float
+$1 ~float
+$2 ~integer
+
+section:code
+push @8
+out out_nl
+
+^6
+push @5
+out out_nl
+inp
+float<
+pop $0
+
+push @6
+out out_nl
+inp
+float<
+pop $1
+
+push @4
+push @3
+push @2
+push @1
+push @0
+out out_nl
+out out_nl
+out out_nl
+out out_nl
+out out_nl
+
+push $0
+push $1
+
+inp
+int<
+pop $2
+
+push @10
+push $2
+jmp_e 0
+
+push @11
+push $2
+jmp_e 1
+
+push @12
+push $2
+jmp_e 2
+
+push @13
+push $2
+jmp_e 3
+
+jmp 5
+
+^0
+add
+jmp 4
+
+^1
+sub
+jmp 4
+
+^2
+mul
+jmp 4
+
+^3
+push $1
+push @9
+float<
+jmp_e 7
+div
+jmp 4
+
+^7
+push @15
+out out_nl
+jmp 8
+
+^4
+push @7
+out out_nl
+out out_nl
+
+^8
+out_nl
+push @14
+out out_nl
+push @10
+inp
+int<
+jmp_e 6
+
+^5
+ret

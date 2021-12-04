@@ -1,0 +1,53 @@
+program_delta
+
+section:manifest
+*name 99_bottles
+*size_stack 100
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~integer 0
+
+section:const 7
+@0 ~string " bottles of beer on the wall "
+@1 ~string " bottles of beer! "
+@2 ~string " Take one down, pass it around "
+@3 ~string " bottles of beer on the wall! "
+@4 ~string " 99 bottles. Copyright(C) Kuzmichev Nicolay 2018 "
+@5 ~integer 0
+@6 ~integer 99
+
+section:variable 1
+$0 ~integer
+
+section:code
+push @4 out out_nl out_nl
+
+push @6 pop $0
+
+^0
+push $0 out
+push @0 out out_nl
+
+push $0 out
+push @1 out out_nl
+
+push @2 out out_nl
+
+push $0
+dec
+pop $0
+push $0 out
+push @3 out out_nl out_nl
+
+push @5
+push $0
+jmp_e 1
+
+jmp 0
+
+^1
+push @5
+ret

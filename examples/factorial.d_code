@@ -1,0 +1,80 @@
+program_delta
+
+section:manifest
+*name factorial
+*size_stack 100
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~null 0
+
+section:const 5
+@0 ~integer 0
+@1 ~integer 1
+@2 ~string " Вычисление факториала n!. Copyright(C) Кузьмичев Николай "
+@3 ~string " Введите число n: "
+@4 ~string " Неверное число!(должно быть больше или равно 0) "
+
+section:variable 1
+$0 ~integer
+
+section:code
+push @3
+push @2
+out out_nl
+out out_nl
+
+inp
+int<
+pop $0
+push $0
+push @0
+jmp_e 0
+push $0
+push @0
+jmp_l 1
+push $0
+call 1
+out out_ln
+jmp 2
+
+^0
+push @1
+out out_ln
+jmp 2
+
+^1
+push @4
+out out_ln
+
+^2
+ret
+
+:1 ~integer 1 $0
+
+section:const 1
+@0 ~integer 1
+
+section:variable 1
+$0 ~integer
+
+section:code
+push $0
+push @0
+jmp_e 2
+
+^1
+push $0
+push $0
+dec
+call 1
+mul
+jmp 3
+
+^2
+push $0
+
+^3
+ret

@@ -1,0 +1,56 @@
+program_delta
+
+section:manifest
+*name bubble_sort
+*size_stack 100
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~null 0
+
+section:const 4
+@0 ~integer 1
+@1 ~integer 5
+@2 ~string " Пузырьковая сортировка для 5 элементов. Copyright(C) Кузьмичев Николай "
+@3 ~string " Введите элементы массива: "
+
+section:variable 1
+$0 ~integer
+
+section:code
+push @3
+push @2
+out out_nl
+out out_nl
+push @0
+pop $0
+
+^1
+inp
+int<
+push @1
+push $0
+jmp_e 0
+push $0
+inc
+pop $0
+jmp 1
+
+^0
+push @0
+pop $0
+
+^2
+out out_nl
+push @1
+push $0
+jmp_e 5
+push $0
+inc
+pop $0
+jmp 2
+
+^5
+ret

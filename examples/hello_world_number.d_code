@@ -1,0 +1,59 @@
+program_delta
+
+section:manifest
+*name hello_world
+*size_stack 1000
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~null 0
+
+section:const 5
+@0 ~integer 0
+@1 ~integer 1
+@2 ~string " Enter number "Hello, World!" strings: "
+@3 ~string " Hello, World! "
+@4 ~string " Error input! "
+
+section:variable 2
+$0 ~integer
+$1 ~integer
+
+section:code
+push @0
+pop $1
+
+push @2
+out out_nl
+
+inp
+int<
+pop $0
+push $0
+push @0
+jmp_l 1
+
+^0
+push $0
+push $1
+jmp_e 2
+
+push $0
+push $1
+inc
+pop $1
+pop $0
+
+push @3
+out out_nl
+
+jmp 0
+
+^1
+push @4
+out out_nl
+
+^2
+ret

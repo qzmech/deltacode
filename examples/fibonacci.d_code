@@ -1,0 +1,64 @@
+program_delta
+
+section:manifest
+*name fibonacci
+*size_stack 100
+
+section:global_const 0
+
+section:global_variable 0
+
+:0 ~null 0
+
+section:const 5
+@0 ~integer 0
+@1 ~integer 1
+@2 ~string " Числа Фибоначчи. Copyright(C) Кузьмичев Николай "
+@3 ~string " Первые 50 чисел Фибоначчи: "
+@4 ~integer 50
+
+section:variable 4
+$0 ~integer
+$1 ~integer
+$2 ~integer
+$3 ~integer
+
+section:code
+push @3
+push @2
+out out_nl //вывод заголовка программы
+out out_nl
+
+push @0
+pop $0
+
+push @1
+push @1
+pop $1 //первоначальные числа последовательности Фибоначчи
+pop $2
+
+push $1
+out out_nl
+
+^1
+push $0 //цикл от 0 до 50
+push @4
+jmp_e 2
+push $0
+push @1
+add
+pop $0
+
+push $2 //вывод текущего члена последовательности
+out out_nl
+
+push $1
+push $2
+pop $1
+push $2
+add //вычисление нового члена последовательности
+pop $2
+jmp 1
+
+^2
+ret //выход из программы
